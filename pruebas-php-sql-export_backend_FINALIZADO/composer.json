@@ -1,0 +1,17 @@
+{
+    "name": "idx/sql-export",
+    "authors": [
+        {
+            "name": "Innovadeluxe",
+            "email": "dev@innovadeluxe.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "classes"
+        ]
+    },
+    "require": {
+        "thingengineer/mysqli-database-class": "^2.9"
+    }
+}
