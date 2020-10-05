@@ -12,6 +12,7 @@
       </div>
       <div class="modal-body">
 	        <form id="frmDates">
+						
 	        	<input type="hidden" 
 	        			name="id"
 	        			id="id">
@@ -60,10 +61,6 @@
 		        			class="form-control"
 		        			autocomplete="off">	
 	        	</div>
-
-	            <div class="row p-4" id="RowCaptcha">
-	            	{$recaptcha->render()}
-	            </div>
 	            <!-- INCLUIR AQUÍ UN FORMULARIO CON NOMBRE, APELLIDOS, EMAIL, TELEFONO -->
 				
 	        </form>

@@ -25,7 +25,9 @@
 				</div>
 	    	</div>
     	</div>
-
+		<input type="hidden" 
+				name="recaptcha_response" 
+				id="recaptchaResponse">
 		<!-- Modal -->
 		{include file="CreateModal.tpl"}
 		{include file="DeleteModal.tpl"}
@@ -34,4 +36,8 @@
 <!-- SECTION SCRIPTS -->
 <script src='views/js/jquery.js'></script>
 <script src='views/js/functions.js'></script>
-<script type="text/javascript" src="views/framework/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" 
+		src="views/framework/bootstrap/js/bootstrap.min.js">
+</script>
+<script src='https://www.google.com/recaptcha/	api.js?render=6Le7qtMZAAAAAMi2XRYWnRdrdEvjw314bE9hXFY8'></script>

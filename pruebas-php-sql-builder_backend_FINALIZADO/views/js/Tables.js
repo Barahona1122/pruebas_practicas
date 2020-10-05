@@ -57,34 +57,160 @@ var Tables = {
 				$("#results").empty();
 			}
 		});
+
+		$(document).on("click","#BtnExportToExcel", function(){
+			_this.GenerateExcel($("#results"),"xls");
+		});
+		$(document).on("click","#BtnExportToSQL", function(){
+			_this.GenerateSQL();
+		});		
+	},
+
+	HeadersTable: function(table_name,table){
+		let option= '';
+		// HEADERS
+		for(var el in table){
+			var obj = table[el];
+			var keys = Object.keys(obj); //Returns array of keys
+			if(el == 0){
+	        	option+='<table id="table_'+table_name+'_'+el+'" class="table tablename_'+table_name+'">';
+	        		option+='<thead>';
+	        			option+='<tr>';
+					      for(var i in keys){
+					        var key = keys[i];
+					        //BODY
+					        if(el == 0){
+					        	option+='<th>'+key+'</th>';
+					        }
+					      }
+	        			option+='</tr>';
+	        		option+='</thead>';
+	        		option+='<tbody>';
+	        		option+='</tbody>';
+	        	option+='<table>';
+			}
+		}
+		return option;
+	},
+
+	BodyTable: function(table_name,table){
+		// BODY
+		let option_body = '';
+		for(var el in table){
+			var obj = table[el];
+			var keys = Object.keys(obj);
+			option_body+='<tr>';
+				for(var i in keys){
+					var key = keys[i];
+					//BODY
+					option_body+='<td>'+obj[key]+'</td>';
+				}
+			option_body+='</tr>';
+		}
+
+		for(var el in table){
+	        $("#table_"+table_name+'_'+el).append(option_body);
+		}
 	},
 
 	ExportToExcel: function(table){
-		// Create a form
-		var mapForm = document.createElement("form");
-		// mapForm.target = "_blank";
-		mapForm.target = "Map";
-		mapForm.method = "POST";
-		mapForm.action = "IndexExportToExcel.php";
+		let _this  = this;
+		let option = '';
 
-		// Create an input
-			var mapInput = document.createElement("input");
-				mapInput.type  = "text";
-				mapInput.name  = "parms";
-				mapInput.value = JSON.stringify(table);
-				mapForm.appendChild(mapInput);
-		
-		document.body.appendChild(mapForm);
-		// "status=0,title=0,height=50,width=50,scrollbars=1"
-		map = window.open("", "Map");
-		if(map){
-		    mapForm.submit();
-		} else {
-		    alert('You must allow popups for this map to work.');
-		}
-		// let current = window.location.href;
-		// location.replace(current+'?data ='+table);
+		option+='<div class="row ">';
+			option+='<div class="col-sm-8">';
+			option+='</div>';
+			option+='<div class="col col-sm text-right">';
+				option+='<button class="btn btn-success" id="BtnExportToExcel">Exportar a Excel</button>';
+			option+='</div>';
+			option+='<div class="col col-sm text-right">';
+				option+='<button class="btn btn-info" id="BtnExportToSQL">Exportar a SQL</button>';
+			option+='</div>';
+		option+='</div>';
+
+		option+='<div class="row">';
+		$(table).each(function(key, val){
+			option+= '<h3>'+ val.table + '</h3>';
+			option+='<br/>';
+			option+= _this.HeadersTable(val.table,val.data);
+		});
+		option+='</div>';
+
+		$("#results").append(option);
+
+		//INSERT ROWS ON EACH TABLE
+		$(table).each(function(key, val){
+			_this.BodyTable(val.table, val.data);
+		});
 	},
+
+    GenerateExcel:function(id,format){
+          let tabla = id;
+          var clone = tabla.clone();
+          var trs = clone.find('tr');
+          $.each(trs, function(i, tr) {
+            // $(tr).find('td:eq(1)').remove(); 
+            // $(tr).find('td:eq(6)').remove(); 
+          });
+          var htmlExport = clone.prop('outerHTML');
+          var ua = window.navigator.userAgent;
+          var msie = ua.indexOf("MSIE ");
+
+          //other browser not tested on IE 11
+          // If Internet Explorer
+          if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+              jQuery('body').append("<iframe id=\"iframeExport\" style=\"display:none\"></iframe>");
+              iframeExport.document.open("txt/html", "replace");
+              iframeExport.document.write(htmlExport);
+              iframeExport.document.close();
+              iframeExport.focus();
+              sa = iframeExport.document.execCommand("SaveAs", true, "Tables."+format);
+          }
+          else {
+              var link = document.createElement('a');
+
+              document.body.appendChild(link); // Firefox requires the link to be in the body
+              link.download = "Tables."+format;
+              link.href = 'data:application/vnd.ms-excel,' + escape(htmlExport);
+              link.click();
+              document.body.removeChild(link);
+          }
+    },
+
+    GenerateSQL: function(){
+		if ('Blob' in window) {
+			var fileName = prompt('Please enter file name to save', 'Query.sql');
+			if (fileName) {
+				var textToWrite = $('.query').val().replace(/n/g, 'rn');
+				var textFileAsBlob = new Blob([textToWrite], { type: 'text/plain' });
+
+				if ('msSaveOrOpenBlob' in navigator) {
+					navigator.msSaveOrOpenBlob(textFileAsBlob, fileName);
+				}else{
+					var downloadLink = document.createElement('a');
+					downloadLink.download = fileName;
+					downloadLink.innerHTML = 'Download File';
+
+					if ('webkitURL' in window) {
+						// Chrome allows the link to be clicked without actually adding it to the DOM.
+						downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+					} else {
+						// Firefox requires the link to be added to the DOM before it can be clicked.
+						downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+						downloadLink.click(function(){
+						document.body.removeChild(event.target);
+						}); 
+
+						downloadLink.style.display = 'none';
+						document.body.appendChild(downloadLink);
+					}
+					downloadLink.click();
+				}
+			}
+		}else{
+			alert('Your browser does not support the HTML5 Blob.');
+		}
+    },
 
 	SearchFields: function(table){
 		$.ajax({
@@ -114,7 +240,6 @@ var Tables = {
 	QuerySql: function(tableArray){
 		let _this = this;
 		$.ajax({
-			// url: 'classes/SqlBuilder.php',
 			url: 'classes/QueryFromFields.php',
 			method: 'POST',
 			data: {
@@ -123,24 +248,17 @@ var Tables = {
 			dataType: 'JSON'
 		})
 		.done(function(response){
-			let option = '';
 			$("#results").empty();
-
-			if(response.length > 0){
-				$(response).each(function(key,tables){
-					option+= '<div class="col-sm-12">';
-						option+= '<h3>'+tables.table+'</h3>';
-						option+= '<br/>';
-						if(tables.data){
-							$(tables.data).each(function(key, fields){
-								let filedss = JSON.stringify(fields);
-								option+= '<div class="row">'+ filedss+'</div>';
-							});
-						}
-					option+='</div>';
+			if(response['data']){
+				_this.ExportToExcel(response['data']);
+			}
+			if(response['sql']){
+				let option = '';
+				$(response['sql']).each(function(key,val){
+					option+=val+';';
+					option+="\n";
 				});
-				$("#results").append(option);
-				_this.ExportToExcel(response);
+			$(".query").val(option);
 			}
 		})
 		.fail(function(error){

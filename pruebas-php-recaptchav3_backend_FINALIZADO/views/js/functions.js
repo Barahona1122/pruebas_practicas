@@ -3,20 +3,14 @@ var Captcha = {
     console.log("Started!");
     this.actions();
     this.ListUser();
+    this.Recaptcha();
     var cd;
   },
   actions: function(){
     let _this = this;
-    this.CreateCaptcha();
-
-    $(document).on("click",".BtnReloadCaptcha", function(){
-      _this.CreateCaptcha();
-    });
 
     $(document).on("click",".BtnRegister", function(){
-      if(_this.CheckCaptcha()){
         _this.Ajax();
-      }
     });
 
     $(document).on("click","#btnNew", function(){
@@ -24,15 +18,16 @@ var Captcha = {
       $("#frmDates")[0].reset();
       $("#OperationType").val("2");
 
-      $("#RowCaptcha").css("display","block");
       $(".BtnRegister").css("display","block");
       $(".BtnReUpdate").css("display","none");
+
+      let CatpChaInput = $("#recaptchaResponse").val();
+      $("#frmDates").append('<input type="hidden" name="recaptcha_response" value="'+CatpChaInput+'">');
     });
 
      $(document).on("click",".btnEdit", function(){
         $("#exampleModal").modal("show");
         $("#OperationType").val("3");
-        $("#RowCaptcha").css("display","none");
         $(".BtnRegister").css("display","none");
         $(".BtnReUpdate").css("display","block");
         _this.EditUser($(this).data('id'));
@@ -54,83 +49,6 @@ var Captcha = {
         _this.Ajax();
      });
 
-  },
-
-  CreateCaptcha: function() {
-    let _this = this;
-    var alpha = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-                      
-    var i;
-    for (i = 0; i < 6; i++) {
-      var a = alpha[Math.floor(Math.random() * alpha.length)];
-      var b = alpha[Math.floor(Math.random() * alpha.length)];
-      var c = alpha[Math.floor(Math.random() * alpha.length)];
-      var d = alpha[Math.floor(Math.random() * alpha.length)];
-      var e = alpha[Math.floor(Math.random() * alpha.length)];
-      var f = alpha[Math.floor(Math.random() * alpha.length)];
-    }
-    _this.cd = a + ' ' + b + ' ' + c + ' ' + d + ' ' + e + ' ' + f;
-    $('#CaptchaImageCode').empty().append('<canvas id="CapCode" class="capcode" width="300" height="80"></canvas>')
-    
-    var c = document.getElementById("CapCode"),
-        ctx=c.getContext("2d"),
-        x = c.width / 2,
-        img = new Image();
-   
-    img.src = "https://webdevtrick.com/wp-content/uploads/captchaback.jpg";
-    img.onload = function () {
-        var pattern = ctx.createPattern(img, "repeat");
-        ctx.fillStyle = pattern;
-        ctx.fillRect(0, 0, c.width, c.height);
-        ctx.font="46px Roboto Slab";
-        ctx.fillStyle = '#212121';
-        ctx.textAlign = 'center';
-        ctx.setTransform (1, -0.12, 0, 1, 0, 15);
-        ctx.fillText(_this.cd,x,55);
-    };
-  },
-   
-  ValidateCaptcha: function() {
-    let _this = this;
-    var string1 = _this.removeSpaces(_this.cd);
-    var string2 = _this.removeSpaces($('#UserCaptchaCode').val());
-    if (string1 == string2) {
-      return true;
-    }
-    else {
-      return false;
-    }
-    alert(_this.cd);
-  },
-   
-  // Remove Spaces
-  removeSpaces: function(string) {
-    return string.split(' ').join('');
-  },
-
-  CheckCaptcha: function() {
-    let _this = this;
-    var IsAllowed = false;
-    var result = _this.ValidateCaptcha();
-    if( $("#UserCaptchaCode").val() == "" || $("#UserCaptchaCode").val() == null || $("#UserCaptchaCode").val() == "undefined") {
-      $('#WrongCaptchaError').text('Por favor ingresa Captcha!').show();
-      $('#UserCaptchaCode').focus();
-    } else {
-      if(result == false) {
-        IsAllowed = false;
-        $('#WrongCaptchaError').text('Captcha no válido!').show();
-        _this.CreateCaptcha();
-        $('#UserCaptchaCode').focus().select();
-      }
-      else {
-        IsAllowed = true;
-        $('#UserCaptchaCode').val('').attr('place-holder','Ingresar Captcha!');
-        _this.CreateCaptcha();
-        $('#WrongCaptchaError').fadeOut(100);
-        $('#SuccessMessage').fadeIn(500).css('display','block').delay(5000).fadeOut(250);
-      }
-    }
-    return IsAllowed;
   },
 
   ListUser:function(){
@@ -230,6 +148,15 @@ var Captcha = {
     .fail(function(error){
       console.log(error);
     });
+  },
+
+  Recaptcha: function(){
+    grecaptcha.ready(function() {
+    grecaptcha.execute('6Le7qtMZAAAAAMi2XRYWnRdrdEvjw314bE9hXFY8')
+    .then(function(token) {
+    var recaptchaResponse = document.getElementById('recaptchaResponse');
+    recaptchaResponse.value = token;
+    });});
   }
 }
 

@@ -27,53 +27,20 @@ class SqlBuilder{
     public function QueryFromFields($table){
     	global $db;
 
-    	$sql_arr = [];
+    	$sql_arr     = [];
+        $sql_query   = [];
         if(count($table) > 0){
             foreach ($table as $field) {
                 $sql  = "SELECT ".$field['field']." FROM ".$field['table'];
                 $rows = $db->rawQuery($sql);
-                array_push($sql_arr, ['table'   => $field['table']
-                                        ,'data' => $rows
-                                    ]);
+                // INSERT DATA INTO ARRAY
+                    array_push($sql_arr, ['table'   => $field['table']
+                                            ,'data' => $rows
+                                        ]);
+                // INSERT QUERY
+                    array_push($sql_query, $sql);
             }
         }
-    	return $sql_arr;
+    	return ['data' => $sql_arr, 'sql' =>$sql_query];
     }
-
-    public function exportToExcel($arr){
-        $filename = "tables.xls";
-        header("Content-Type: application/vnd.ms-excel");
-        header("Content-Disposition: attachment; filename=".$filename);
-
-        $columns = false;
-        if($arr){
-            $first_arr = [];
-            $second_arr =[];
-            foreach($arr as $key => $tables) {
-                array_push($first_arr, $tables->table);
-                array_push($second_arr, $tables->data);
-            }
-
-            foreach ($first_arr as $key => $value) {
-                echo $value."\n";
-            }
-
-            foreach ($second_arr as $keyOne => $valueOne) {
-                if($valueOne){
-                    echo json_encode($valueOne);
-                }
-            }
-            // foreach ($second_arr as $key => $value) {
-            //     if(!$columns) {
-            //         if($key == 0){
-            //             echo implode("\t",array_keys(json_decode($value, true))) . "\n";
-            //         }
-            //         $columns = true;
-            //     }
-            //     // echo implode("\t", array_values($second_arr[$key])) . "\n";
-
-            // }
-        }
-    }
-
 }

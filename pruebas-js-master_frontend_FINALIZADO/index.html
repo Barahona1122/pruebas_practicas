@@ -1,163 +1,75 @@
-<link rel="stylesheet" type="text/css" href="assets/framework/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/frameworks/steps/demo/css/normalize.css">
+<link rel="stylesheet" href="assets/frameworks/steps/demo/css/main.css">
+<link rel="stylesheet" href="assets/frameworks/steps/demo/css/jquery.steps.css">
 <html>
     <head>
-    	<title>Principal</title>
+    	<title>FrontEnd</title>
     </head>
     <body>
-    	<div class="container">
-        	<!-- <div id="idxstepper"></div> -->
-        	
-        	<!-- PRIMERO -->
-			<div class="card card_one">
-				<div class="card-header">
-					<h4>Vista Botones Default</h4>
-				</div>
-				<div class="card-body">
-					<div class="charCardOne" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
-					<br/>
-		        	<div class="row">
-		        		<div class="col-sm text-center">
-		        			<button data-classname="charCardOne" data-id="card_one" class="btn btn-success btnCardNumber">Anterior</button>
-		        		</div>
-		        		<div class="col-sm text-center">
-		        			<button data-classname="charCardTwo" data-id="card_two" class="btn btn-success btnCardNumber">Siguiente</button>
-		        		</div>
-		        		<div class="col-sm text-card_four">
-		        			<button  data-classname="charCardFour" data-id="card_four" class="btn btn-success btnCardNumber">Finalizar</button>
-		        		</div>
-		        	</div>
-				</div>
-			</div>
+        <div id="idxstepper"></div>
+        <div class="content">
+            <h1>Basic Demo</h1>
 
-			<!-- SEGUNDO  NUMEROS HORIZONTAL-->
-			<div class="card card_two">
-				<div class="card-header">
-					<h4>Vista Numeros Horizontal</h4>
-				</div>
-				<div class="card-body">
-		        	<div class="row">
-		        		<div class="col-sm text-center">
-		        			<button data-classname="charCardOne" data-id="card_one"  class="btn btn-circle btn-xl btn-success btnCardNumber">1</button>
-		        		</div>
-		        		<div class="col-sm text-center">
-		        			<button data-classname="charCardTwo" data-id="card_two" class="btn btn-circle btn-xl btn-success btnCardNumber">2</button>
-		        		</div>
-		        		<div class="col-sm text-center">
-		        			<button data-classname="charCardThree" data-id="card_three" class="btn btn-circle btn-xl btn-success btnCardNumber">3</button>
-		        		</div>
-		        		<div class="col-sm text-center">
-		        			<button data-classname="charCardFour" data-id="card_four" class="btn btn-circle btn-xl btn-success btnCardNumber">4</button>
-		        		</div>
-		        	</div>
-		        	<div class="charCardTwo" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
 
-		        	<div class="row">
-		        		<div class="col-sm"></div>
-		        		<div class="col-sm text-right">
-		        			<button data-classname="charCardFour" data-id="card_four" class="btn btn-success btnCardNumber">Finalizar</button>
-		        		</div>
-		        		<div class="col-sm">
-		        			<h1>
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								  <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-								</svg>
-		        			</h1>
-		        		</div>
-		        	</div>
-				</div>
-			</div>
 
-			<!-- TERCERO -->
-			<div class="card card_three">
-				<div class="card-header">
-					<h4>Vista Iconos</h4>
-				</div>
-				<div class="card-body">
+            <div id="wizard">
+                <h2>First Step</h2>
+                <section>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut nulla nunc. Maecenas arcu sem, hendrerit a tempor quis, 
+                        sagittis accumsan tellus. In hac habitasse platea dictumst. Donec a semper dui. Nunc eget quam libero. Nam at felis metus. 
+                        Nam tellus dolor, tristique ac tempus nec, iaculis quis nisi.</p>
+                </section>
 
-		        	<div class="charCardThree" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+                <h2>Second Step</h2>
+                <section>
+                    <p>Donec mi sapien, hendrerit nec egestas a, rutrum vitae dolor. Nullam venenatis diam ac ligula elementum pellentesque. 
+                        In lobortis sollicitudin felis non eleifend. Morbi tristique tellus est, sed tempor elit. Morbi varius, nulla quis condimentum 
+                        dictum, nisi elit condimentum magna, nec venenatis urna quam in nisi. Integer hendrerit sapien a diam adipiscing consectetur. 
+                        In euismod augue ullamcorper leo dignissim quis elementum arcu porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Vestibulum leo velit, blandit ac tempor nec, ultrices id diam. Donec metus lacus, rhoncus sagittis iaculis nec, malesuada a diam. 
+                        Donec non pulvinar urna. Aliquam id velit lacus.</p>
+                </section>
 
-		        	<br/>
-		        	<div class="row">
-		        		<div class="col-sm"></div>
-		        		<div class="col-sm text-left">
-		        			<h1 data-classname="charCardTwo" data-id="card_two" class="btnCardNumber">
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-								</svg>
-		        			</h1>
-		        		</div>
-		        		<div class="col-sm">
-		        			<h1 data-classname="charCardFour" data-id="card_four" class="btnCardNumber">
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-								</svg>
-		        			</h1>
-		        		</div>
+                <h2>Third Step</h2>
+                <section>
+                    <p>Morbi ornare tellus at elit ultrices id dignissim lorem elementum. Sed eget nisl at justo condimentum dapibus. Fusce eros justo, 
+                        pellentesque non euismod ac, rutrum sed quam. Ut non mi tortor. Vestibulum eleifend varius ullamcorper. Aliquam erat volutpat. 
+                        Donec diam massa, porta vel dictum sit amet, iaculis ac massa. Sed elementum dui commodo lectus sollicitudin in auctor mauris 
+                        venenatis.</p>
+                </section>
 
-		        		<div class="col-sm">
-		        			<h1>
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								  <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-								</svg>
-		        			</h1>
-		        		</div>
-		        	</div>
-				</div>
-			</div>
-
-			<!-- CUARTO NUMEROS VERTICAL -->
-			<div class="card card_four">
-				<div class="card-header">
-					<h4>Vista Numeros Vertical</h4>
-				</div>
-				<div class="card-body">
-		        	<div class="row">
-		        		<div class="col-sm-2">
-		        			<div class="row">
-				        		<div class="col-sm-12 p-3 text-left">
-				        			<button data-classname="charCardOne" data-id="card_one" class="btn btn-circle btn-xl btn-success btnCardNumber">1</button>
-				        		</div>
-				        		<div class="col-sm-12 p-3 text-left">
-				        			<button data-classname="charCardTwo" data-id="card_two" class="btn btn-circle btn-xl btn-success btnCardNumber">2</button>
-				        		</div>
-				        		<div class="col-sm-12 p-3 text-left">
-				        			<button data-classname="charCardThree" data-id="card_three" class="btn btn-circle btn-xl btn-success btnCardNumber">3</button>
-				        		</div>
-				        		<div class="col-sm-12 p-3 text-left">
-				        			<button data-classname="charCardFour" data-id="card_four" class="btn btn-circle btn-xl btn-success btnCardNumber">4</button>
-				        		</div>
-		        			</div>
-		        		</div>
-		        		<div class="col-sm-9">
-				        	<div class="charCardFour" style="height: 370px; max-width: 920px; margin: 0px auto;">
-				        	</div>
-				        	<br/>
-				        	<div class="row p-2">
-				        		<div class="col-sm"></div>
-				        		<div class="col-sm text-right">
-				        			<button data-classname="charCardFour" data-id="card_four" class="btn btn-success btnCardNumber">Finalizar</button>
-				        		</div>
-				        		<div class="col-sm">
-				        			<h1>
-										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-										  <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-										</svg>
-				        			</h1>
-				        		</div>
-				        	</div>
-		        		</div>
-		        	</div>
-				</div>
-			</div>
-    	</div>
+                <h2>Forth Step</h2>
+                <section>
+                    <p>Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor. 
+                        Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae. 
+                        Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut commodo tortor.</p>
+                </section>
+            </div>
+        </div>
     </body>
 </html>
 
-<!-- <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="assets/framework/bootstrap/js/bootstrap.min.js"></script> -->
 
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js">
+</script>
 <script type="text/javascript" src="assets/js/chart.js"></script>
+
+
+<script src="assets/frameworks/steps/lib/modernizr-2.6.2.min.js"></script>
+<script src="assets/frameworks/steps/lib/jquery-1.9.1.min.js"></script>
+<script src="assets/frameworks/steps/lib/jquery.cookie-1.3.1.js"></script>
+<script src="assets/frameworks/steps/build/jquery.steps.js"></script>
+            <script>
+                $(function ()
+                {
+                    $("#wizard").steps({
+                        headerTag: "h2",
+                        bodyTag: "section",
+                        transitionEffect: "slideLeft"
+                    });
+                });
+            </script>

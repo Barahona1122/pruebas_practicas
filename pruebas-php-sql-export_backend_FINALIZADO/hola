@@ -1,0 +1,16 @@
+id;name;last_name;second_name;email;phone;ip
+1;Prueba;Apaterno;Amaterno;carlos@carlos.com;123456;
+2;;;;;;
+3;ddd;dd;dd;dd;dd;
+4;S;SS;SDSD;test;ddd;
+5;x;xx;x;x;x;
+6;cc;ccc;cc;ccc;ccc;
+7;x;x;x;x;x;
+8;xcc;;x;x;xxx;
+9;xx;x;x;xx;xxx;
+10;d;dd;ddd;ddd;dd;::1
+13;;;;;;::1
+14;;;;;;::1
+15;;;;;;::1
+16;;;;;;::1
+17;;;;;;::1

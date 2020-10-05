@@ -10,7 +10,7 @@ class Recaptcha{
         $smarty->display('recaptcha.tpl');
     }
 
-    public function InsertUser($name, $last_name, $second_name, $email, $phone){
+    public function InsertUser($name, $last_name, $second_name, $email, $phone, $ip){
     	global $db;
 
 		$data = Array (
@@ -18,7 +18,8 @@ class Recaptcha{
 			'last_name'   => $last_name,
 			'second_name' => $second_name,
 			'email'       => $email,
-			'phone'       => $phone
+			'phone'       => $phone,
+			'ip'          => $ip
 		);
 
 		$insert = $db->insert("users",$data);
